@@ -189,8 +189,7 @@ public interface SelfServiceKioskTransactionRepository extends JpaRepository<Tra
 			@Param("bankId") String bankId,
 			@Param("creditDebitCardAdjudicationCode")String creditDebitCardAdjudicationCode,
 			@Param("AdjudicationCode") String AdjudicationCode
-
-	);
+			);
 	// For saveTaxes through Transaction Objects
 	static final String SAVE_TAXES_BREAKUP = "INSERT INTO TR_LTM_TX_BRKUP ( ID_STR_RT, ID_WS, AI_TRN, DC_DY_BSN, AI_LN_ITM, ID_ITM, ID_ITM_POS, QU_ITM_LM_RTN_SLS, TX_BRKUP_TX_CD,"
 			+ "TX_BRKUP_TX_CD_DSCR, TX_BRKUP_TX_RT, TX_BRKUP_TXBL_AMT, TX_BRKUP_TX_AMT, TX_FCT, TXBL_FCT, TS_MDF_RCRD, TS_CRT_RCRD) "
