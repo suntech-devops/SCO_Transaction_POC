@@ -43,6 +43,9 @@ public class TransactionReturnParameters implements Serializable {
 
 	private String employeeId;
 
+	private int pts_redeemed;
+	
+
 	private int transStatus;
 
 	private String tenderRepositoryId;

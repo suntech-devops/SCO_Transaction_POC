@@ -622,6 +622,18 @@ public interface SelfServiceKioskTransactionRepository extends JpaRepository<Tra
 			@Param("bizDate") String bizDate);
 	        
 	
-	
+	static final String INSERT_LOYALTY_RECORD="insert into tr_ltm_ly_pt_tnd (id_str_rt, id_ws, dc_dy_bsn, ai_trn, ai_ln_itm,ly_pt_crd_nmb, mo_azn_amt ) values (:storeId, :registerId, :bizDate, :transNo, :retailTransactionLineItemSequence, :customerInfo, :ptsRedeemed )";
+	@Modifying
+	@Transactional
+	@Query(value=INSERT_LOYALTY_RECORD, nativeQuery = true)
+	void insertLoyaltyRecord(
+			@Param("storeId") String storeId,
+			@Param("registerId") String registerId,
+			@Param("bizDate") String bizDate,
+			@Param("transNo") int transNo,
+			@Param("retailTransactionLineItemSequence") int retailTransactionLineItemSequence,
+			@Param("customerInfo") String customerInfo,
+			@Param("ptsRedeemed") int ptsRedeemed
+			);
 
 }

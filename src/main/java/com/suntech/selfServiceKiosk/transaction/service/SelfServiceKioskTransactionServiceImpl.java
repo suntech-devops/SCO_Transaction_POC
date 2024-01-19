@@ -196,6 +196,10 @@ public class SelfServiceKioskTransactionServiceImpl implements SelfServiceKioskT
 				{
 					updateTaxHistory(transactionReturnParameters, returnTaxLineItem, returnLineItem);
 				}
+				
+				/* inserting record for loyalty points */
+				insertLoyaltyRecord(transactionReturnParameters, returnLineItem);
+				
 				transactionResponse
 						.setMessage(SelfServiceKioskResponseMessageConstants.SUCCESSFUL_SAVE_SALE_TRANSACTION_001);
 				transactionResponse.setErrorCode(null);
@@ -1124,7 +1128,27 @@ public class SelfServiceKioskTransactionServiceImpl implements SelfServiceKioskT
 
 		return transactionResponse;
 	}
+	
+	
+	
+	
+	
+	public SelfServiceKioskTransactionResponse insertLoyaltyRecord(TransactionReturnParameters transactionReturnParameters,
+			SelfServiceKioskSaleReturnLineItem returnLineItem) {
+		try {
+				transactionRepository.insertLoyaltyRecord(transactionReturnParameters.getStoreId(), transactionReturnParameters.getRegisterId(),transactionReturnParameters.getBizDate(), transactionReturnParameters.getTransNo(), transactionReturnParameters.getReturnLineItems().size(), transactionReturnParameters.getCustomer().getMobileNumber(),transactionReturnParameters.getPts_redeemed());
+				System.out.println(transactionReturnParameters.getReturnLineItems().size());
 
+			
+		} catch (Exception e) {
+			transactionResponse.setMessage(SelfServiceKioskErrorMessageConstants.ERR_SAVE_SALE_TRANSACTION_001_MSG);
+			transactionResponse.setErrorCode(SelfServiceKioskErrorCodeConstants.ERR_SAVE_SALE_TRANSACTION_001);
+			logger.error("Exception occured in insert loyaltyPoints " ,e);
+		}
+
+		return transactionResponse;
+	}
+	
 	public SelfServiceKioskTransactionResponse getTaxHistory(TransactionReturnParameters transactionReturnParameters,
 			SelfServiceKioskSaleReturnTaxLineItem returnTaxLineItem,
 			SelfServiceKioskSaleReturnLineItem returnLineItem) {
